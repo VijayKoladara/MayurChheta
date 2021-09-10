@@ -1,0 +1,21 @@
+
+LIST OF APIs
+
+
+
+
+Slide API -> http://localhost/mayurchhetatask/api/slides.php
+
+Business Category -> http://localhost/mayurchhetatask/api/business-category.php
+
+Business Category Image -> http://localhost/mayurchhetatask/api/business-category-image.php
+
+
+Upcoming Category -> http://localhost/mayurchhetatask/api/upcoming-category.php
+
+Upcoming Category Image -> http://localhost/mayurchhetatask/api/upcoming-category-image.php
+
+
+General Category -> http://localhost/mayurchhetatask/api/general-category.php
+
+General Category Image -> http://localhost/mayurchhetatask/api/general-category-image.php
