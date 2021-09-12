@@ -5,6 +5,15 @@ if(!isset($_SESSION['admin_username']))
 }
 else
 {
+
+    $get_records = "select * from settings where id=1";
+    $run_records = mysqli_query($con,$get_records);
+
+    $row = mysqli_fetch_array($run_records);
+
+    $get_appversion = $row['app_version'];
+    $get_email = $row['email'];
+    $get_privacypolicy = $row['privacy_policy'];
 ?>
 
 
@@ -14,6 +23,21 @@ else
     <div class="col-lg-3">
     </div>
     <div class="col-lg-12">
+    <?php
+
+if(isset($_SESSION['status']))
+{
+    ?>
+<div class="alert alert-success" role="alert" id="message">
+    <?php echo $_SESSION['status']; ?>
+
+</div>
+<?php
+
+unset($_SESSION['status']);
+}
+
+?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -22,26 +46,12 @@ else
             </div>
 
             <div class="panel-body">
-                <?php
-
-                if(isset($_SESSION['status']))
-                {
-                    ?>
-                <div class="alert alert-success" role="alert">
-                    <?php echo $_SESSION['status']; ?>
-
-                </div>
-                <?php
-
-                unset($_SESSION['status']);
-                }
-
-                ?>
+               
                 <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="" class="col-md-3">App Version</label>
-                        <input type="text" name="app_version" id="" class="form-control" required>
+                        <input type="text" name="app_version" id="" class="form-control" value="<?php echo $get_appversion;  ?>" required>
                     </div>
 
 
@@ -50,12 +60,12 @@ else
 
                     <div class="form-group">
                         <label for="" class="col-md-3">Email</label>
-                        <input type="email" name="email" id="" class="form-control" required>
+                        <input type="email" name="email" id="" class="form-control" value="<?php echo $get_email; ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="" class="col-md-3">Privacy Policy</label>
-                        <input type="text" name="privacy_policy" id="" class="form-control" required>
+                        <input type="text" name="privacy_policy" id="" class="form-control" value="<?php echo $get_privacypolicy; ?>" required>
                     </div>
 
 
@@ -73,89 +83,7 @@ else
         </div>
 
     </div>
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">
-                    <i class="fa a-money fa-w"></i> View Settings
-                </h3>
-            </div>
-
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>App Version</th>
-                                <th>Email</th>
-                                <th>Privacy Policy</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-                            <!-- Display Products -->
-                            <?php
-                                $i=0;
-                                $get_product = "select * from settings";
-                                $run_p = mysqli_query($con,$get_product);
-
-                                while($row = mysqli_fetch_array($run_p))
-                                {
-                                    $id = $row['id'];
-                                    $app_version = $row['app_version'];
-                                    $email = $row['email'];
-                                   
-                                    $privacy_policy = $row['privacy_policy'];
-                                   
-                                    
-                                    
-                                    
-                                    $i++;
-
-                                    ?>
-
-
-
-                            <tr>
-                                <td><?php echo $id;  ?> </td>
-                                <td><?php echo $app_version;  ?> </td>
-
-
-                                <td><?php echo $email;  ?> </td>
-                                <td><?php echo $privacy_policy;  ?> </td>
-
-                                <td>
-                                    <a href="index.php?edit_setting=<?php echo $id; ?>">
-                                        <i class="fa fa-pencil fa-2x"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="index.php?delete_setting=<?php echo $id; ?>">
-                                        <i class="fa fa-trash-o fa-2x"></i>
-                                    </a>
-                                </td>
-
-
-                            </tr>
-                            <?php  } ?>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    
 
 
 
@@ -178,13 +106,13 @@ if(isset($_POST['submit']))
   
     
    
-    $inset_products = "insert into settings(app_version,email,privacy_policy) values('$s_appversion','$s_email','$s_privacy')";
+    $update_setting = "update settings set app_version='$s_appversion',email='$s_email',privacy_policy='$s_privacy' where id=1";
 
-    $run_product = mysqli_query($con,$inset_products);
+    $run_product = mysqli_query($con,$update_setting);
 
     if($run_product)
     {
-        $_SESSION['status'] = "All settings Are Saved !!";
+        $_SESSION['status'] = "Settings Saved !!";
         echo "<script> window.open('index.php?settings','_self')</script>";
     }
 }
