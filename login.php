@@ -60,7 +60,7 @@
         {
             $_SESSION['admin_username'] = $admin_username;
             $_SESSION['loggedin'] = true;
-            echo "<script> alert('Your Are Successfully Logged in!')  </script>";
+           
             echo "<script> window.open('index.php?dashboard','_self') </script>";
         }
         else

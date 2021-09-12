@@ -1,4 +1,6 @@
 <?php
+
+
 if(!isset($_SESSION['admin_username']))
 {
     echo "<script> window.open('login.php','_self')  </script>";
@@ -22,6 +24,21 @@ else
             </div>
 
             <div class="panel-body">
+                <?php
+
+                if(isset($_SESSION['status']))
+                {
+                    ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $_SESSION['status']; ?>
+                    
+                </div>
+                <?php
+
+                  unset($_SESSION['status']);
+                }
+
+                ?>
                 <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -44,10 +61,7 @@ else
                         <input type="date" name="category_date" id="" class="form-control" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="" class="col-md-3">App Version</label>
-                        <input type="text" name="app_version" id="" class="form-control" required>
-                    </div>
+
 
 
 
@@ -93,7 +107,7 @@ else
                                 <th>CATEGORY NAME</th>
                                 <th>BG IMAGE</th>
                                 <th>DATE</th>
-                                <th>APP VERSION</th>
+
                                 <th>STATUS</th>
                                 <th>EDIT</th>
                                 <th>DELETE</th>
@@ -115,7 +129,7 @@ else
                                     $s_name = $row['category_name'];
                                     $s_image = $row['category_image'];
                                     $s_date = $row['date'];
-                                    $app_version = $row['app_version'];
+                                    
                                     $s_status = $row['status'];
                                    
                                     
@@ -133,7 +147,7 @@ else
                                 <td><img src="slide_images/<?php echo $s_image;  ?>" alt="" class="img-responsive"
                                         width="50" height="50"> </td>
                                 <td><?php echo $s_date;  ?> </td>
-                                <td><?php echo $app_version;  ?> </td>
+
                                 <td><?php echo $s_status;  ?> </td>
 
                                 <td>
@@ -181,7 +195,7 @@ if(isset($_POST['submit']))
     
     $category_status = $_POST['category_status'];
     $category_date = $_POST['category_date'];
-    $cat_app_version = $_POST['app_version'];
+    
     
 
     // Image Uploading
@@ -194,13 +208,13 @@ if(isset($_POST['submit']))
 
     move_uploaded_file($tmp_name,"slide_images/$category_img");
    
-    $inset_products = "insert into upcoming_category(category_name,category_image,date,app_version,status) values('$category_name','$category_img','$category_date','$cat_app_version','$category_status')";
+    $inset_products = "insert into upcoming_category(category_name,category_image,date,status) values('$category_name','$category_img','$category_date','$category_status')";
 
     $run_product = mysqli_query($con,$inset_products);
 
     if($run_product)
     {
-        echo "<script> alert('Upcoming Category Inserted!')</script>";
+        $_SESSION['status'] = "Upcoming Category Inserted";
         echo "<script> window.open('index.php?insert_up_cat','_self')</script>";
     }
 }

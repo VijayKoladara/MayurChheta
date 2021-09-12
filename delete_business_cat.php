@@ -23,7 +23,7 @@
 
                 if($run_cat)
                 {
-                    echo "<script> alert('Selected Business Category Deleted')  </script>";
+                   $_SESSION['status'] = "Category Deleted";
                     echo "<script> window.open('index.php?insert_business_category','_self')  </script>";
                 }
                 else

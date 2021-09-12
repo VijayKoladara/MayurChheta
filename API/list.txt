@@ -6,6 +6,8 @@ LIST OF APIs
 
 Slide API -> http://localhost/mayurchhetatask/api/slides.php
 
+Settings API -> http://localhost/mayurchhetatask/api/settings.php
+
 Business Category -> http://localhost/mayurchhetatask/api/business-category.php
 
 Business Category Image -> http://localhost/mayurchhetatask/api/business-category-image.php

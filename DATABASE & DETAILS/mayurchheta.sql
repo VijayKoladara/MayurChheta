@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2021 at 08:31 AM
+-- Generation Time: Sep 12, 2021 at 06:38 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -58,7 +58,8 @@ CREATE TABLE `business_category` (
 --
 
 INSERT INTO `business_category` (`id`, `category_name`, `category_image`, `status`) VALUES
-(1, 'demo', 'Untitled.png', 'publish');
+(1, 'demo2', 'Untitled.png', 'publish'),
+(4, 'demo', 'vikram.jpg', 'publish');
 
 -- --------------------------------------------------------
 
@@ -126,6 +127,26 @@ INSERT INTO `general_category_images` (`id`, `category_name`, `post_name`, `imag
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(100) NOT NULL,
+  `app_version` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `privacy_policy` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `app_version`, `email`, `privacy_policy`) VALUES
+(4, '1.5', 'abc.vijaykoladara212@gmail.com', 'https://getbootstrap.com/docs/5.0/components/alerts/');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `slides`
 --
 
@@ -143,7 +164,7 @@ CREATE TABLE `slides` (
 --
 
 INSERT INTO `slides` (`id`, `slide_name`, `slide_image`, `slide_url_type`, `slide_url`, `slide_status`) VALUES
-(1, 'koladara vijay', 'vikram.jpg', 'inbound', 'http://localhost/mayurchhetatask/', 'publish'),
+(1, 'Vijay koladara', 'vikram.jpg', 'inbound', 'http://localhost/mayurchhetatask/', 'publish'),
 (4, 'Demo Slide', 'DSC_0378.jpg', 'inbound', 'http://localhost/mayurchhetatask/index.php?dashboard', 'publish');
 
 -- --------------------------------------------------------
@@ -157,7 +178,6 @@ CREATE TABLE `upcoming_category` (
   `category_name` varchar(100) NOT NULL,
   `category_image` varchar(100) NOT NULL,
   `date` date NOT NULL,
-  `app_version` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -165,8 +185,9 @@ CREATE TABLE `upcoming_category` (
 -- Dumping data for table `upcoming_category`
 --
 
-INSERT INTO `upcoming_category` (`id`, `category_name`, `category_image`, `date`, `app_version`, `status`) VALUES
-(1, 'demo', 'vikram.jpg', '2021-09-10', '1.0', 'publish');
+INSERT INTO `upcoming_category` (`id`, `category_name`, `category_image`, `date`, `status`) VALUES
+(1, 'demo', 'vikram.jpg', '2021-09-10', 'draft'),
+(4, 'vijay koladara', 'Untitled.png', '2021-09-13', 'publish');
 
 -- --------------------------------------------------------
 
@@ -224,6 +245,12 @@ ALTER TABLE `general_category_images`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `slides`
 --
 ALTER TABLE `slides`
@@ -255,7 +282,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `business_category`
 --
 ALTER TABLE `business_category`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `business_category_images`
@@ -267,7 +294,7 @@ ALTER TABLE `business_category_images`
 -- AUTO_INCREMENT for table `general_category`
 --
 ALTER TABLE `general_category`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `general_category_images`
@@ -276,16 +303,22 @@ ALTER TABLE `general_category_images`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `slides`
 --
 ALTER TABLE `slides`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `upcoming_category`
 --
 ALTER TABLE `upcoming_category`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `upcoming_category_images`

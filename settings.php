@@ -17,7 +17,7 @@ else
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="fa a-money fa-w"></i> Insert Business Category
+                    <i class="fa a-money fa-w"></i> Settings
                 </h3>
             </div>
 
@@ -40,8 +40,8 @@ else
                 <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="" class="col-md-3">CATEGORY NAME</label>
-                        <input type="text" name="category_name" id="" class="form-control" required>
+                        <label for="" class="col-md-3">App Version</label>
+                        <input type="text" name="app_version" id="" class="form-control" required>
                     </div>
 
 
@@ -49,27 +49,19 @@ else
 
 
                     <div class="form-group">
-                        <label for="" class="col-md-3">BG IMAGE </label>
-                        <input type="file" name="category_img" id="" class="form-control" required
-                            accept="image/png, image/gif, image/jpeg">
+                        <label for="" class="col-md-3">Email</label>
+                        <input type="email" name="email" id="" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="col-md-3">Privacy Policy</label>
+                        <input type="text" name="privacy_policy" id="" class="form-control" required>
                     </div>
 
 
 
                     <div class="form-group">
-                        <label for="" class="col-md-3">STATUS</label>
-                        <select class="form-select form-control" name="category_status">
-
-                            <option value="publish">Publish</option>
-                            <option value="drafts">Drafts</option>
-                        </select>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <input type="submit" value="Insert Business Category" name="submit"
-                            class="btn btn-primary form-control">
+                        <input type="submit" value="Save" name="submit" class="btn btn-primary form-control">
 
                     </div>
 
@@ -85,7 +77,7 @@ else
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
-                    <i class="fa a-money fa-w"></i> View Business Categories
+                    <i class="fa a-money fa-w"></i> View Settings
                 </h3>
             </div>
 
@@ -95,12 +87,12 @@ else
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>CATEGORY NAME</th>
-                                <th>BG IMAGE</th>
+                                <th>App Version</th>
+                                <th>Email</th>
+                                <th>Privacy Policy</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
 
-                                <th>STATUS</th>
-                                <th>EDIT</th>
-                                <th>DELETE</th>
 
                             </tr>
 
@@ -110,16 +102,16 @@ else
                             <!-- Display Products -->
                             <?php
                                 $i=0;
-                                $get_product = "select * from business_category";
+                                $get_product = "select * from settings";
                                 $run_p = mysqli_query($con,$get_product);
 
                                 while($row = mysqli_fetch_array($run_p))
                                 {
-                                    $s_id = $row['id'];
-                                    $s_name = $row['category_name'];
-                                    $s_image = $row['category_image'];
+                                    $id = $row['id'];
+                                    $app_version = $row['app_version'];
+                                    $email = $row['email'];
                                    
-                                    $s_status = $row['status'];
+                                    $privacy_policy = $row['privacy_policy'];
                                    
                                     
                                     
@@ -131,20 +123,20 @@ else
 
 
                             <tr>
-                                <td><?php echo $s_id;  ?> </td>
-                                <td><?php echo $s_name;  ?> </td>
-                                <td><img src="slide_images/<?php echo $s_image;  ?>" alt="" class="img-responsive"
-                                        width="50" height="50"> </td>
+                                <td><?php echo $id;  ?> </td>
+                                <td><?php echo $app_version;  ?> </td>
 
-                                <td><?php echo $s_status;  ?> </td>
+
+                                <td><?php echo $email;  ?> </td>
+                                <td><?php echo $privacy_policy;  ?> </td>
 
                                 <td>
-                                    <a href="index.php?edit_business_cat=<?php echo $s_id; ?>">
+                                    <a href="index.php?edit_setting=<?php echo $id; ?>">
                                         <i class="fa fa-pencil fa-2x"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="index.php?delete_business_cat=<?php echo $s_id; ?>">
+                                    <a href="index.php?delete_setting=<?php echo $id; ?>">
                                         <i class="fa fa-trash-o fa-2x"></i>
                                     </a>
                                 </td>
@@ -179,30 +171,21 @@ if(isset($_POST['submit']))
    
     
     
-    $category_name = $_POST['category_name'];
+    $s_appversion = $_POST['app_version'];
     
-    $category_status = $_POST['category_status'];
+    $s_email = $_POST['email'];
+    $s_privacy = $_POST['privacy_policy'];
   
     
-
-    // Image Uploading
-
-    $category_img = $_FILES['category_img']['name'];
-    
-
-    $tmp_name = $_FILES['category_img']['tmp_name'];
-    
-
-    move_uploaded_file($tmp_name,"slide_images/$category_img");
    
-    $inset_products = "insert into business_category(category_name,category_image,status) values('$category_name','$category_img','$category_status')";
+    $inset_products = "insert into settings(app_version,email,privacy_policy) values('$s_appversion','$s_email','$s_privacy')";
 
     $run_product = mysqli_query($con,$inset_products);
 
     if($run_product)
     {
-        $_SESSION['status'] = "Business Category Inserted !!";
-        echo "<script> window.open('index.php?insert_business_category','_self')</script>";
+        $_SESSION['status'] = "All settings Are Saved !!";
+        echo "<script> window.open('index.php?settings','_self')</script>";
     }
 }
 ?>

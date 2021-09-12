@@ -13,18 +13,18 @@
 
         <?php
 
-            if(isset($_GET['delete_general_cat']))
+            if(isset($_GET['delete_setting']))
             {
-                $delete_id = $_GET['delete_general_cat'];
+                $delete_id = $_GET['delete_setting'];
 
-                $delete_cat = "delete from general_category where id='$delete_id'";
+                $delete_cat = "delete from settings where id='$delete_id'";
 
                 $run_cat = mysqli_query($con,$delete_cat);
 
                 if($run_cat)
                 {
                     $_SESSION['status'] = "Deleted Successfully";
-                    echo "<script> window.open('index.php?insert_general_category','_self')  </script>";
+                    echo "<script> window.open('index.php?settings','_self')  </script>";
                 }
                 else
                 {

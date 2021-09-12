@@ -36,6 +36,11 @@
                 </a>
             </li>
             <li>
+                <a href="index.php?settings">
+                    <i class="fa fa-fw fa-cog"></i>&nbsp; Settings
+                </a>
+            </li>
+            <li>
                 <a href="">
                     <i class="fas fa-arrow-down"></i>&nbsp; Categories &nbsp; <i class="fas fa-arrow-down"></i>
                 </a>

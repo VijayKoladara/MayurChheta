@@ -22,6 +22,21 @@ else
                 </div>
 
                 <div class="panel-body">
+                <?php
+
+                    if(isset($_SESSION['status']))
+                    {
+                        ?>
+                    <div class="alert alert-success" role="alert">
+                        <?php echo $_SESSION['status']; ?>
+                        
+                    </div>
+                    <?php
+
+                    unset($_SESSION['status']);
+                    }
+
+                    ?>
                     <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                         <div class="form-group">
@@ -187,7 +202,7 @@ if(isset($_POST['submit']))
 
     if($run_product)
     {
-        echo "<script> alert('General Category Inserted!')</script>";
+       $_SESSION['status'] = "General Category Inserted !!";
         echo "<script> window.open('index.php?insert_general_category','_self')</script>";
     }
 }

@@ -20,7 +20,7 @@ if(isset($_GET['edit_business_cat']))
 
     $update_cat_name = $row['category_name'];
     $old_image = $row['category_image'];
-    $date = $row['date'];
+   
     $update_status = $row['status'];
     
     
@@ -45,6 +45,21 @@ if(isset($_GET['edit_business_cat']))
             </div>
 
             <div class="panel-body">
+            <?php
+
+                if(isset($_SESSION['status']))
+                {
+                    ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $_SESSION['status']; ?>
+                    
+                </div>
+                <?php
+
+                unset($_SESSION['status']);
+                }
+
+                ?>
                 <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -64,12 +79,7 @@ if(isset($_GET['edit_business_cat']))
 
                     </div>
 
-                    <div class="form-group">
-                        <label for="" class="col-md-3">Date </label>
-                        <input type="date" name="category_date" id="" class="form-control"
-                            value="<?php echo $date;   ?>">
-
-                    </div>
+                   
 
 
                     <div class="form-group">
@@ -122,7 +132,7 @@ if(isset($_POST['submit']))
 {
    $category_name = $_POST['category_name'];
    $category_status = $_POST['category_status'];
-   $category_date = $_POST['category_date'];
+  
   
    $new_image = $_FILES['category_img']['name'];    
 
@@ -135,7 +145,7 @@ if(isset($_POST['submit']))
    }
 
   
-       $query = "update business_category SET category_name='$category_name',category_image='$update_filename',date='$category_date',status='$category_status' WHERE id='$get_id'";
+       $query = "update business_category SET category_name='$category_name',category_image='$update_filename',status='$category_status' WHERE id='$get_id'";
        $run_query = mysqli_query($con,$query);
 
        if($run_query)
@@ -145,7 +155,7 @@ if(isset($_POST['submit']))
                move_uploaded_file($_FILES['category_img']['tmp_name'],"slide_images/".$_FILES['category_img']['name']);
                unlink("slide_images/".$old_image);
            }
-           echo "<script> alert('Business Category Updated Successfully!') </script>";
+          $_SESSION['status'] = "Business Category Updated !!";
            echo "<script> window.open('index.php?insert_business_category','_self') </script>";
        }
        else

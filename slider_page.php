@@ -22,6 +22,7 @@ else
             </div>
 
             <div class="panel-body">
+               
                 <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -114,7 +115,7 @@ if(isset($_POST['submit']))
 
     if($run_product)
     {
-        echo "<script> alert('Slide Inserted!')</script>";
+       $_SESSION['status'] = "Slider Inserted !!";
         echo "<script> window.open('index.php?dashboard')</script>";
     }
 }

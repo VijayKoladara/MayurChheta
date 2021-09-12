@@ -143,7 +143,7 @@ if(isset($_POST['submit']))
                move_uploaded_file($_FILES['category_img']['tmp_name'],"slide_images/".$_FILES['category_img']['name']);
                unlink("slide_images/".$old_image);
            }
-           echo "<script> alert('General Category Updated Successfully!') </script>";
+          $_SESSION['status'] = "General Category Updated";
            echo "<script> window.open('index.php?insert_general_category','_self') </script>";
        }
        else

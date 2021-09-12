@@ -23,7 +23,7 @@
 
                 if($run_cat_delete)
                 {
-                    echo "<script> alert('Selected Slide Deleted')  </script>";
+                    $_SESSION['status'] = "Slider Deleted !!";
                     echo "<script> window.open('index.php?dashboard','_self')  </script>";
                 }
                 else

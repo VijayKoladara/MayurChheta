@@ -165,7 +165,7 @@ if(isset($_POST['submit']))
                move_uploaded_file($_FILES['slide_img']['tmp_name'],"slide_images/".$_FILES['slide_img']['name']);
                unlink("slide_images/".$old_image);
            }
-           echo "<script> alert('Updated Successfully!') </script>";
+           $_SESSION['status'] = "Slider Updated Successfully !!";
            echo "<script> window.open('index.php?dashboard','_self') </script>";
        }
        else

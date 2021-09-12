@@ -21,7 +21,7 @@ if(isset($_GET['edit_up_cat']))
     $update_cat_name = $row['category_name'];
     $old_image = $row['category_image'];
     $date = $row['date'];
-    $app_version = $row['app_version'];
+   
     $update_status = $row['status'];
     
     
@@ -46,6 +46,21 @@ if(isset($_GET['edit_up_cat']))
             </div>
 
             <div class="panel-body">
+                <?php
+
+                    if(isset($_SESSION['status']))
+                    {
+                        ?>
+                                    <div class="alert alert-success" role="alert">
+                                        <?php echo $_SESSION['status']; ?>
+
+                                    </div>
+                                    <?php
+
+                    unset($_SESSION['status']);
+                    }
+
+                    ?>
                 <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -73,11 +88,7 @@ if(isset($_GET['edit_up_cat']))
 
                     </div>
 
-                    <div class="form-group">
-                        <label for="" class="col-md-3">App Version</label>
-                        <input type="text" name="app_version" id="" class="form-control"
-                            value="<?php echo $app_version; ?>">
-                    </div>
+
 
 
                     <div class="form-group">
@@ -131,7 +142,7 @@ if(isset($_POST['submit']))
    $category_name = $_POST['category_name'];
    $category_status = $_POST['category_status'];
    $category_date = $_POST['category_date'];
-   $category_app_version = $_POST['app_version'];
+   
   
    $new_image = $_FILES['category_img']['name'];    
 
@@ -144,7 +155,7 @@ if(isset($_POST['submit']))
    }
 
   
-       $query = "update upcoming_category SET category_name='$category_name',category_image='$update_filename',date='$category_date',app_version='$category_app_version',status='$category_status' WHERE id='$get_id'";
+       $query = "update upcoming_category SET category_name='$category_name',category_image='$update_filename',date='$category_date',status='$category_status' WHERE id='$get_id'";
        $run_query = mysqli_query($con,$query);
 
        if($run_query)
@@ -154,7 +165,7 @@ if(isset($_POST['submit']))
                move_uploaded_file($_FILES['category_img']['tmp_name'],"slide_images/".$_FILES['category_img']['name']);
                unlink("slide_images/".$old_image);
            }
-           echo "<script> alert('Upcoming Category Updated Successfully!') </script>";
+           $_SESSION['status'] = "Upcoming Category Updated Successfully";
            echo "<script> window.open('index.php?insert_up_cat','_self') </script>";
        }
        else

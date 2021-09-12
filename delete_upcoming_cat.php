@@ -23,7 +23,7 @@
 
                 if($run_cat)
                 {
-                    echo "<script> alert('Selected Upcoming Category Deleted')  </script>";
+                   $_SESSION['status'] = "Upcoming Category Deleted";
                     echo "<script> window.open('index.php?insert_up_cat','_self')  </script>";
                 }
                 else

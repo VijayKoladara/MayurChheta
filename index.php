@@ -134,6 +134,18 @@ if (!isset($_SESSION['admin_username'])) {
 
                     include 'edit_general_cat_image.php';
                 }
+                if (isset($_GET['settings'])) {
+
+                    include 'settings.php';
+                }
+                if (isset($_GET['edit_setting'])) {
+
+                    include 'edit_setting.php';
+                }
+                if (isset($_GET['delete_setting'])) {
+
+                    include 'delete_setting.php';
+                }
 
                 
 
